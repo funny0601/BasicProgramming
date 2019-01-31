@@ -16,7 +16,7 @@ class Decision {
 	}
 }
 
-public class week2_1 {
+public class Findpalindrome {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 
