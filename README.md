@@ -1,2 +1,2 @@
 # python_Study
-> with Python and rarely C & JAVA
+> Mostly with Python and rarely with C & JAVA
