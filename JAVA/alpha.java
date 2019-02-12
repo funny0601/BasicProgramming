@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class alpha {
 
 	public static void main(String[] args) {
-		System.out.println("exit를 입력하면 종료됩니다.");
+		System.out.println("exit to end the program.");
 		Scanner s = new Scanner(System.in);
 		while (true) {
 			
