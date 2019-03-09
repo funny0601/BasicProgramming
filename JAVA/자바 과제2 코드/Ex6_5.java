@@ -7,7 +7,7 @@ public class Ex6_5 {
 		int hour=now.get(Calendar.HOUR);
 		int minute=now.get(Calendar.MINUTE);
 		int hour_24=now.get(Calendar.HOUR_OF_DAY);
-		System.out.println("ÇöÀç ½Ã°£Àº "+hour+"½Ã "+minute+"ºÐÀÔ´Ï´Ù.");
+		System.out.println("í˜„ìž¬ ì‹œê°„ì€ " + hour + "ì‹œ " + min + "ë¶„ìž…ë‹ˆë‹¤.");
 		if (hour_24>4 && hour_24<12)
 			System.out.println("Good Morning");
 		else if (hour_24>=12&& hour_24<18)
