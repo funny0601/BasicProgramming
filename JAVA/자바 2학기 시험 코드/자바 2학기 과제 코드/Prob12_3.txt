@@ -1,0 +1,64 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+public class Prob12_3 extends JFrame{
+	int ct=0;
+	public Prob12_3(){
+		super("DrawPolygonEx");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setContentPane(new MyPanel());
+		setSize(300,300);
+		setVisible(true);
+	}
+	
+	class MyPanel extends JPanel {
+		private Vector<Integer> x = new Vector<Integer>();
+		private Vector<Integer> y = new Vector<Integer>();
+		
+		boolean endFlag = false;
+		public MyPanel() {
+			JButton b=new JButton("Clear");
+			add(b);
+			b.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					x.removeAllElements();
+					y.removeAllElements();
+					endFlag = false;
+					repaint();
+				}				
+			});
+			this.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+						x.add(e.getX());
+						y.add(e.getY());
+						if (x.size() >1) repaint();						
+					}				
+			});
+		}
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.setColor(Color.MAGENTA);
+			if (endFlag) {
+				x.removeAllElements();
+				y.removeAllElements();
+				endFlag = false;
+				return;}
+			int s=x.size(), j;
+			for (int i=0; i<s; i++){
+				j=(i+1) % s;
+				g.drawLine(x.get(i),  y.get(i), x.get(j),  y.get(j));							
+			}
+		}
+	}	
+
+static public void main(String[] args) {
+		new Prob12_3();
+	}
+}

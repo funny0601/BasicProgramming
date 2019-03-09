@@ -1,0 +1,46 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class Prob9_4 extends JFrame {
+	private Color[] color={Color.red, Color.orange, Color.yellow, Color.green, 
+			Color.cyan, Color.blue, Color.magenta, Color.gray, Color.pink, Color.lightGray};
+	
+	public Prob9_4(){
+		setTitle("Ten Color Buttons Frame");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		Container c = getContentPane();
+		c.setLayout(new GridLayout(1,10));
+		
+		for(int i=0; i<10; i++){
+			JButton b=new JButton(Integer.toString(i));
+			
+			b.setBackground(color[i]);
+			b.addActionListener(new MyAL());
+			c.add(b);
+		}
+		
+		setSize(500,200);
+		setVisible(true);
+		
+	}
+	
+	class MyAL implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			int j;
+			JButton b=(JButton)e.getSource();
+			Color c=b.getBackground();
+			for(int i=0; i<10; i++){
+				if (c.equals(color[i])) {
+					 j=(i+1) % 10;
+					 b.setBackground(color[j]);
+				}				
+			}
+		}
+	}
+	
+	public static void main(String[] args){
+		new Prob9_4();
+	}
+}

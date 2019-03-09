@@ -1,0 +1,24 @@
+import java.io.*;
+ import java.util.Scanner;
+
+public class FileIO {
+  public static void main(String[] args) {
+   String name;
+   int x;
+   try {
+    File file = new File("test.txt");
+    PrintWriter pw = new PrintWriter("out.txt");
+    Scanner s = new Scanner(file);//키보드 말고 파일로부터 받겠다
+   while(s.hasNext()) {
+     name=s.next();
+     x=s.nextInt();
+     pw.println(name+","+ x); //System.out : 모니터
+   }
+    s.close();
+    pw.close();
+   }
+   catch(IOException e) {
+    System.out.println("File not found.");
+   }
+  }
+ }

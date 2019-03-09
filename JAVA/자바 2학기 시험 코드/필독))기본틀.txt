@@ -1,0 +1,59 @@
+package example;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Sample extends JFrame {
+	public Sample(){
+		super(" ");//창이름
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		
+		//1번째 방법:
+		//setContentPane(new MyPanel());
+		
+		//2번째 방법:
+		Container c = getContentPane();
+		c.add(new MyPanel());
+		
+		//JFrame 기본 레이아웃: BorderLayout
+		//setLayout(new BorderLayout());
+		
+		//setOpaque(true) 불투명하게 나오게 함
+		
+		setSize(300,300);
+		setVisible(true);
+	}
+
+	class MyPanel extends JPanel {
+		
+		public MyPanel() {
+			//JPanel 기본 레이아웃: FlowLayout
+			//setLayout(new FlowLayout());
+			addMouseMotionListener(new MouseMotionAdapter(){
+			public void mouseDragged(MouseEvent e){
+				
+			}
+		});
+	}
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+					  
+			repaint();		
+		}
+	}
+	
+	static public void main(String[] args) {
+		new Sample();
+	}
+}
+
+/*************************************/
+//위치 랜덤 설정
+//int x = (int)(Math.random()*200)+50; //50~250
+//int y = (int)(Math.random()*200)+50; //50~250
+//setLayout(null) 일 때 아래 설정들 해줘야 함
+//label.setLocation(x, y);
+//label.setSize(10, 10);
+//label.setOpaque(true);
+//0.0~1.0 (double)

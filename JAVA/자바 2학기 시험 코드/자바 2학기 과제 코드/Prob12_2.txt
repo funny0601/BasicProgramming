@@ -1,0 +1,85 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Prob12_2 extends JFrame{
+	static final int W=400, H=400;
+	private MyPanel panel = new MyPanel();
+	public Prob12_2(){
+		setTitle("ImageControlEx");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setContentPane(panel);
+		setSize(W,H);
+		setVisible(true);
+		
+		getContentPane().setFocusable(true);
+		getContentPane().requestFocus();
+	}
+	class MyPanel extends JPanel{
+		static final int STEP=10;
+		private ImageIcon icon = new ImageIcon("images/apple.jpg");
+		private Image img = icon.getImage();
+		private int width, height; 
+		private int x=0, y=0; // Initial position of the image
+		private JButton[] b=new JButton[4];
+		private String[] s ={"Up", "Down", "Left", "Right"};
+		
+		public MyPanel(){
+			width=img.getWidth(this);
+			height=img.getHeight(this);
+			for(int i = 0; i<4; i++){
+				b[i]=new JButton(s[i]);
+				add(b[i]);
+				b[i].addActionListener(new MyAL());
+			}
+			addKeyListener(new KeyAdapter(){
+				@Override
+				public void keyPressed(KeyEvent e){
+					if(e.getKeyChar()=='+'){
+						width=(int)(width*1.1);
+						height=(int)(height*1.1);
+						repaint();
+					}
+					else if(e.getKeyChar()=='-'){
+						width=(int)(width*0.9);
+						height=(int)(height*0.9);
+						repaint();
+					}
+				}
+			});		
+		}
+		class MyAL implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				JButton btn=(JButton)e.getSource();
+				if((btn.getText().equals(s[0]))&&(y>0)){
+					y=y-STEP;
+					repaint();
+				}
+				else if((btn.getText().equals(s[1]))&&(y<(H-height))){
+					y=y+STEP;
+					repaint();
+				}
+				else if((btn.getText().equals(s[2]))&&(x>0)){
+					x=x-STEP;
+					repaint();
+				}
+				else if((btn.getText().equals(s[3]))&&(x<(W-width))){
+					x=x+STEP;
+					repaint();
+				}
+				setFocusable(true);
+				requestFocus();
+			}
+		}
+		
+		public void paintComponent(Graphics g){
+			super.paintComponent(g);
+			g.drawImage(img, x,y,width,height, this);
+		}
+	}
+	
+	public static void main(String[] args){
+		new Prob12_2();
+	}
+	
+}

@@ -1,0 +1,36 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+
+public class Prob12_1a extends JFrame {
+	public Prob12_1a(){
+		super("이미지 그리기 연습");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setContentPane(new MyPanel());
+		setSize(300,300);
+		setVisible(true);
+	}
+	
+	class MyPanel extends JPanel {
+		private ImageIcon icon = new ImageIcon("images/back.jpg");
+		private Image img = icon.getImage();
+		static final int MARGIN=50; 
+		
+		public MyPanel() {
+			setLayout(new FlowLayout());
+		}
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(img, 0+MARGIN, 0+MARGIN, this.getWidth()-MARGIN*2, this.getHeight()-MARGIN*2, this);			
+		}
+	}
+	
+	static public void main(String[] args) {
+		new Prob12_1a();
+	}
+}

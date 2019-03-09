@@ -1,0 +1,35 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Prob11_1 extends JFrame{
+	public Prob11_1(){
+		setTitle("TextField and ComboBox Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		
+		final JTextField tf = new JTextField(10);
+		final JComboBox<String> combo = new JComboBox<String>();
+		c.add(tf);
+		c.add(combo);
+		tf.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				combo.addItem(tf.getText());
+				tf.setText("");
+			}
+		});
+		combo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				tf.setText((String)combo.getSelectedItem());
+			}
+		});
+		
+		setSize(300, 300);
+		setVisible(true);
+	}
+	
+	public static void main(String[] args){
+		new Prob11_1();
+	}
+}

@@ -1,0 +1,63 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Example10_5 extends JFrame{
+	
+	Example10_5(){
+		setTitle("KeyEvent and MouseEvent Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		
+		JLabel la=new JLabel("Love Java");
+		
+		la.setFont(new Font("Arial", Font.PLAIN, 10));
+		la.addKeyListener(new MyKL());
+		la.addMouseListener(new MyML());
+		c.add(la);
+		
+		setSize(300,200);
+		setVisible(true);
+		
+		la.setFocusable(true);
+		la.requestFocus();
+	}
+	
+	class MyKL extends KeyAdapter{
+		public void keyPressed(KeyEvent e) {
+			JLabel l = (JLabel)e.getSource();
+			Font f=l.getFont();
+			int size=f.getSize();
+			int code=e.getKeyCode();
+			if(e.getKeyChar() == '+') 
+				l.setFont(new Font("Arial", Font.PLAIN, size+5));				
+			else if(e.getKeyChar() == '-') {
+				if(size>5)
+					l.setFont(new Font("Arial", Font.PLAIN, size-5));
+			}
+			else if(code==KeyEvent.VK_LEFT) 
+			{
+				StringBuffer text=new StringBuffer(l.getText());
+				l.setText(text.reverse().toString());
+			}
+			
+		}
+	}
+	
+	class MyML extends MouseAdapter{
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2) {
+				JLabel l = (JLabel)e.getSource();
+				Font f=l.getFont();
+				int size=f.getSize();
+				String s=f.getFontName();
+				Example10_5.this.setTitle(s+","+size);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Example10_5();
+	}
+}

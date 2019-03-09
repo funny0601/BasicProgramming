@@ -1,0 +1,53 @@
+package example;
+//스레드 p.690
+import java.awt.*;
+import javax.swing.*;
+
+class TimerRunnable implements Runnable{
+	private JLabel timerLabel;
+	
+	public TimerRunnable(JLabel timerLabel) {
+		this.timerLabel=timerLabel;
+	}
+	
+	//스레드 코드
+	@Override
+	public void run() {
+		int n=0;
+		while(true) {
+			timerLabel.setText(Integer.toString(n));
+			n++;
+			try {
+				Thread.sleep(1000);
+			}catch(InterruptedException e) {
+				return; //예외 발생시 스레드 종료
+			}
+		}
+	}
+}
+
+public class ThreadTimerEx extends JFrame{
+	public ThreadTimerEx() {
+		setTitle("제목");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+	
+		JLabel timerLabel = new JLabel();
+		timerLabel.setFont(new Font("Gothic", Font.ITALIC, 80));
+		c.add(timerLabel);
+		
+		TimerRunnable runnable = new TimerRunnable(timerLabel);
+		Thread th = new Thread(runnable);
+		//달라진 부분
+		
+		setSize(300, 170);
+		setVisible(true);
+		
+		th.start();
+	}
+	
+	public static void main(String[] args) {
+		new ThreadTimerEx();
+	}
+}

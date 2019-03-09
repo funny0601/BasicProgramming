@@ -1,0 +1,56 @@
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.event.*;
+import java.awt.event.*;
+
+public class Prob11_2 extends JFrame{
+	private JLabel la;
+	private JSlider slider;
+	private JTextField tf;
+	public Prob11_2(){
+		setTitle("Slider and Textfield Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new BorderLayout());
+		
+		// Add the slider to the north
+		slider = new JSlider(JSlider.HORIZONTAL, 1, 100, 20);
+		init_slider(slider);
+		slider.addChangeListener(new ChangeListener(){
+			public void stateChanged(ChangeEvent e){
+				la.setFont(new Font("Arial", Font.PLAIN, slider.getValue()));
+				tf.setText(Integer.toString(slider.getValue()));
+			}
+		});
+		c.add(slider, BorderLayout.NORTH);
+		
+		// Add the label to the center
+		la = new JLabel("I Love Java", SwingConstants.CENTER);
+		la.setFont(new Font("Arial", Font.PLAIN, 20));
+		c.add(la, BorderLayout.CENTER);
+		
+		// Add the textfield to the south
+		tf=new JTextField(10);
+		tf.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JTextField t = (JTextField)e.getSource();
+				slider.setValue(Integer.parseInt(t.getText()));
+			}
+		});
+		c.add(tf, BorderLayout.SOUTH);
+		
+		setSize(300,300);
+		setVisible(true);
+	}	
+	
+	public void init_slider(JSlider sl) {
+		sl.setPaintLabels(true);
+		sl.setPaintTicks(true);
+		sl.setPaintTrack(true);
+		sl.setMajorTickSpacing(20);
+		sl.setMinorTickSpacing(5);
+	}
+	public static void main(String[] args){
+		new Prob11_2();
+	}
+}

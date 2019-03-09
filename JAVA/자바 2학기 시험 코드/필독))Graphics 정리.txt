@@ -1,0 +1,40 @@
+			g.setColor(Color.GREEN); //초록색으로 그래픽 색 지정
+			
+			g.setFont(new Font("Arial", Font.BOLD, 30)); //글씨 폰트, 스타일, 크기
+			
+			g.drawString("hello", 30, 30); //str 문자열을 (x, y) 영역에 그림
+			
+			g.drawLine(10, 10, 20, 20); //(10, 10)에서 (20, 20)까지 선 그리기
+			
+			g.drawOval(10, 10, 100, 100); //(10, 10)에서 100 X 100 크기의 사각형에 내접하는 원(타원)
+			//g.fillOval
+			g.drawRect(10,  10,  100,  100); //(10, 10)에서 100 X 100 크기의 사각형
+			//g.fillRect
+			g.drawRoundRect(10,  10, 100, 100, 40, 60); //책 648쪽 참고
+			//g.fillRoundRect
+			g.drawArc(20,100,80,80,90,-270); //책 650쪽 참고
+			//g.fillArc
+			int [] x = {80, 40, 80, 120};
+			int [] y = {40, 120, 200, 120};
+			g.drawPolygon(x, y, 4); //책 650쪽 참고-폐다각형 그리기
+			//g.fillPolygon
+
+			
+			//책 654쪽
+			g.drawImage(img,  20,  20,  this);
+			g.drawImage(img, 20, 20, 100, 200, this);
+			//(20, 20)의 위치에 100 X200 사이즈로 그리기
+			g.drawImage(img,  0,  0,  this.getWidth(), this.getHeight(), this);
+			//패널 크기에 꽉 차게 그리기
+			
+			g.drawImage(img,  20, 20, 250,100, 50, 0, 150, 150, this);
+			//(20, 20)에서 (250, 100) 영역에 img의 (50, 0)에서 (150, 150)의 사각형 부분 그리기
+			
+			g.setClip(100, 20, 150,  150);
+			g.drawImage(img, 0,  0,  getWidth(),  getHeight(), this);
+			//클리핑 영역 정하기
+			
+			
+			//img.getWidth(this) - 이미지 가로 길이
+			//img.getHeight(this) - 이미지 세로 길이
+			

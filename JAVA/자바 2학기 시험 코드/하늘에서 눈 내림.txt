@@ -1,0 +1,105 @@
+package example;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+import java.lang.Math;
+
+class Point {
+	int x;
+	int y;
+
+	Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class kara extends JFrame {
+	Container contentPane;
+
+	kara() {
+		setTitle("aa");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = getContentPane();
+		MyPanel panel = new MyPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		setSize(1000, 1000);
+		setVisible(true);
+	}
+
+	class MyPanel extends JPanel
+
+	{
+
+		ImageIcon bk = new ImageIcon("images/cherry.jpg");
+		Image bkll = bk.getImage();
+
+		Vector<Point> snowVector = new Vector<Point>();
+
+		MyPanel() {
+			setLayout(null);
+			for (int i = 0; i < 50; i++) {
+				snowVector.add(new Point((i * 30), (int) Math.round(Math.random() * 1000)));
+			}
+
+			SnowThread snow = new SnowThread(snowVector, this);
+
+		}
+
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(bkll, 0, 0, getWidth(), getHeight(), this);
+			g.setColor(Color.white);
+			for (int i = 0; i < snowVector.size(); i++) {
+				Point p = snowVector.get(i);
+				g.fillOval(p.x, p.y, 10, 10);
+			}
+		}
+	}
+
+	class SnowThread implements Runnable {
+		Vector<Point> a;
+		MyPanel panel;
+
+		SnowThread(Vector<Point> a, MyPanel panel) {
+			this.panel = panel;
+			this.a = a;
+
+			Thread th = new Thread(this);
+			th.start();
+
+		}
+
+		public void run() {
+
+			while (true) {
+
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					return;
+				}
+				changeSnowPosition();
+				panel.repaint();
+			}
+		}
+
+		public void changeSnowPosition()
+
+		{
+			for (int i = 0; i < a.size(); i++) {
+				Point p = a.get(i);
+				p.y += 10;
+				if (p.y >= 1000) {
+					p.y = 0;
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		new kara();
+	}
+}

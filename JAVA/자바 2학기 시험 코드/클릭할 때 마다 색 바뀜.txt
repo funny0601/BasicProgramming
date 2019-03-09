@@ -1,0 +1,56 @@
+package example;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Sample extends JFrame {
+	public Sample(){
+		super(" ");//창이름
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		
+		//1번째 방법:
+		setContentPane(new MyPanel());
+		
+		//2번째 방법:
+		//Container c = getContentPane();
+		//c.add(new MyPanel());
+		
+		//JFrame 기본 레이아웃: BorderLayout
+		//setLayout(new BorderLayout());
+		
+		//setOpaque(true) 불투명하게 나오게 함
+		
+		setSize(300,300);
+		setVisible(true);
+	}
+
+	class MyPanel extends JPanel {
+		int x = 10;
+		int y = 10;
+		int z = 10;
+		public MyPanel() {
+			//JPanel 기본 레이아웃: FlowLayout
+			//setLayout(new FlowLayout());
+			addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				x = (int)(Math.random()*256);
+				y = (int)(Math.random()*256);
+				z = (int)(Math.random()*256);
+			}
+		});
+	}
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.setColor(Color.GREEN); //초록색으로 그래픽 색 지정
+			g.drawString("안녕", 30, 30); //str 문자열을 (x, y) 영역에 그림
+			g.setColor(new Color(x, y, z));
+			g.drawString("색 랜덤", 50, 50);
+			repaint();
+		}
+	}
+	
+	static public void main(String[] args) {
+		new Sample();
+	}
+}

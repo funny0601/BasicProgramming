@@ -1,0 +1,88 @@
+package csy;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Sample extends JFrame {
+	public Sample() {
+		super("BubbleGame");// √¢¿Ã∏ß
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MyPanel p = new MyPanel();
+
+		setContentPane(p);
+		setSize(300, 300);
+		setVisible(true);
+
+	}
+
+	static public void main(String[] args) {
+		new Sample();
+	}
+}
+
+class MyPanel extends JPanel {
+
+	public MyPanel() {
+		setLayout(null);
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				MyThread th = new MyThread(e.getX(), e.getY(), MyPanel.this);
+				th.start();
+			}
+		});
+
+	}
+
+}
+
+class MyThread extends Thread {
+	private int x, y;
+	private MyPanel p;
+	private JLabel la;
+
+	public MyThread(int x, int y, MyPanel p) {
+		ImageIcon img = new ImageIcon("images/apple.jpg");
+
+		la = new JLabel(img);
+		this.p = p;
+		this.x = x;
+		this.y = y;
+		la.setSize(img.getIconWidth(), img.getIconHeight());
+		la.setLocation(x, y);
+		la.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				p.remove((JLabel)e.getSource());
+				//p.remove(la);
+				p.repaint();
+			}
+		});
+		
+		p.add(la);
+		p.repaint();
+
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			x = la.getX();
+			y = la.getY() - 5;
+			if (y < 0) {
+				p.remove(la);
+				p.repaint();
+				return;
+			}
+			la.setLocation(x, y);
+			p.repaint();
+
+			try {
+				sleep(200);
+			} catch (InterruptedException e) {
+
+			}
+
+		}
+	}
+}

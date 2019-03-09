@@ -1,0 +1,67 @@
+addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				e.getSource();
+			}
+		});
+		
+		addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				//e.getStateChanged() 선택된 경우 ItemEvent.SELECTED, 해제된 경우 ItemEvent.DESELECTED
+				//e.getItem() 이벤트를 발생시킨 아이템 객체 리턴  - 책 600쪽
+			}
+		
+		});
+		
+		addMouseListener(new MouseAdapter() {
+			//566쪽
+			public void mousePressed(MouseEvent e) {
+				//마우스 버튼이 눌러졌을 때
+				e.getX(); //마우스 포인터의 x 위치
+				e.getY(); //마우스 포인터의 y 위치
+				e.getPoint(); //마우스 포인터의 위치를 Point 객체로 리턴, Point 객체에 x, y 정보 있음
+				e.getClickCount();// 마우스의 클릭 횟수 리턴
+				e.getButton(); //눌러진 마우스 버튼의 번호 리턴 //568쪽
+			}
+			public void mouseReleased(MouseEvent e) {
+				//마우스가 눌러진 위치와 떼어진 위치가 같든 다르든 호출
+			}
+			public void mouseClicked(MouseEvent e) {
+				//마우스가 눌러진 위치에서 그대로 떼어질 때
+			}
+			public void mouseEntered(MouseEvent e) {
+				//마우스가 컴포넌트 위에 올라갈 때
+			}
+			public void mouseExited(MouseEvent e) {
+				//마우스가 컴포넌트에서 내려올 때
+			}
+			public void mouseDragged(MouseEvent e) {
+				//MouseMotionListener
+				//마우스가 드래그되는 동안
+			}
+			public void mouseMoved(MouseEvent e) {
+				//MouseMotionListener
+				//마우스가 움직이는 동안
+			}
+		});
+		
+		addKeyListener(new KeyAdapter() {
+			//컴포넌트에 포커스 주기 위해서
+			//setFocusable(true);
+			//requestFocus();
+			public void keyPressed(KeyEvent e) {
+				//키를 누르는 순간
+				if(e.getKeyChar()=='q') //유니코드 값
+				e.getKeyCode(); //가상 키와 비교
+				//가상 키 종류:558쪽    
+				if(e.getKeyCode()==KeyEvent.VK_F5)
+				//System.exit(0); //시스템 종료
+				KeyEvent.getKeyText(e.getKeyCode());
+				//키 이름 문자열 출력
+			}
+			public void keyReleased(KeyEvent e) {
+				//누른 키를 떼는 순간(제어키=UP, DOWN..)
+			}
+			public void keyTyped(KeyEvent e) {
+				//누른 키를 떼는 순간(유니코드 키=A~Z..)
+			}
+		});

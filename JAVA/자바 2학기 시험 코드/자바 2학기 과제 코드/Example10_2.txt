@@ -1,0 +1,65 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+public class Example10_2 extends JFrame{
+	private JLabel la = new JLabel("No Mouse Event");
+	
+	public Example10_2() {
+		setTitle("MouseListener and MouseMotionListener Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		
+		MouseListener listener = new MyMouseListener();
+		
+		c.addMouseListener(listener);
+		c.addMouseMotionListener((MouseMotionListener) listener);
+		c.add(la);
+		
+		setSize(300,200);
+		setVisible(true);
+	}
+	
+	class MyMouseListener implements MouseListener, MouseMotionListener {
+		public void mousePressed(MouseEvent e) {
+			la.setText("MousePressed ("+e.getX()+", "+e.getY ()+")");
+		}
+		public void mouseReleased(MouseEvent e) {
+			la.setText("MouseReleased("+e.getX()+", "+e.getY()+")");
+			Component c = (Component)e.getSource();
+			c.setBackground(null);// 원래 배경색으로 
+		}
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2) {
+				int r=(int)(Math.random()*255);
+				int g=(int)(Math.random()*255);
+				int b=(int)(Math.random()*255);
+				Component c = (Component)e.getSource();
+				c.setBackground(new Color(r,g,b));
+			}
+			
+		}
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+		public void mouseExited(MouseEvent e) {
+			Component c = (Component)e.getSource();
+			c.setBackground(null); // 원래 배경색으로
+		}
+		public void mouseDragged(MouseEvent e) {
+			la.setText("MouseDragged ("+e.getX()+","+e.getY()+")");
+			Component c = (Component)e.getSource();
+			c.setBackground(Color.yellow);
+		}
+		public void mouseMoved(MouseEvent e) {
+			la.setText("MouseMoved ("+e.getX()+","+e.getY()+")");
+			Component c = (Component)e.getSource();
+			c.setBackground(Color.red);
+		}
+		}
+	
+	public static void main(String[] args) {
+		new Example10_2();
+	}
+}

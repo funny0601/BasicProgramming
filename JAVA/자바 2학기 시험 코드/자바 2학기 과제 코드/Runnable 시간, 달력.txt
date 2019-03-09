@@ -1,0 +1,63 @@
+package csy;
+
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
+
+public class Prob13_3 extends JFrame implements Runnable {
+	JLabel la = new JLabel();
+
+	public Prob13_3() {
+		super("DigitalTimer");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+
+		String s = showDay();
+		JLabel day = new JLabel(s);
+		add(day, BorderLayout.NORTH);
+		add(la, BorderLayout.SOUTH);
+		setSize(300, 200);
+		setVisible(true);
+	}
+
+	String showDay() {
+		int y, m, d;
+		Calendar now = Calendar.getInstance();
+		y = now.get(Calendar.YEAR);
+		m = now.get(Calendar.MONTH) + 1; // 0¿¡¼­ 11
+		d = now.get(Calendar.DAY_OF_MONTH);
+		String s = y + "/" + m + "/" + d;
+		return s;
+	}
+
+	String showTime() {
+		int h, m, s;
+		Calendar now = Calendar.getInstance();
+		h = now.get(Calendar.HOUR_OF_DAY);
+		m = now.get(Calendar.MINUTE);
+		s = now.get(Calendar.SECOND);
+		String ss=h+":"+m+":"+s;
+		return ss;
+	}
+	
+	@Override
+	public void run() {
+		int n=0;
+		while(true) {
+			n++;
+			//la.setText(Integer.toString(n));
+			la.setText(showTime());
+			la.setFont(new Font("Arial", Font.BOLD, 30));
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException e ) {return;}
+		
+		}
+	}
+
+	public static void main(String[] args) {
+		Prob13_3 p=new Prob13_3();
+		Thread th = new Thread(p);
+		th.start();
+	}
+}

@@ -1,0 +1,75 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Prob11_3 extends JFrame{
+	private int [] money= new int[4]; 
+	private JTextField [] mtf= new JTextField[3];
+	private JLabel change=new JLabel();
+	private JTextField source=new JTextField(30);
+	public Prob11_3(){
+		setTitle("Money Changer");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c= getContentPane();
+		c.setLayout(null);
+		c.setBackground(Color.PINK);
+		init(c);
+		
+		setSize(300,300);
+		setVisible(true);
+	}
+	
+	class MyAL implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			int m=Integer.parseInt(source.getText());
+			int [] amt={50000,10000,1000};
+			for(int i=0; i<3; i++){									
+				mtf[i].setText(Integer.toString(m/amt[i])); 
+				m=m%amt[i];	
+			}
+			change.setText("나머지는 "+m+"원입니다.");
+		}
+	}
+			
+	public void init(Container c) {
+		JLabel la=new JLabel("금액");
+		la.setLocation(30,20);
+		la.setSize(70,20);
+		c.add(la);
+		
+		source.setSize(100,20);
+		source.setLocation(80,20);
+		source.addActionListener(new MyAL());
+		c.add(source);
+		
+		JButton btn=new JButton("계산");
+		btn.setSize(60,20);
+		btn.setLocation(200,20);
+		btn.addActionListener(new MyAL());
+		c.add(btn);
+		
+		JLabel [] value=new JLabel[3];
+		String[] s={"오만원권", "만원권", "천원권"};
+		
+		for(int i=0; i<value.length; i++){
+			value[i]=new JLabel(s[i]);
+			value[i].setSize(60, 20);
+			value[i].setLocation(30, 70+i*30);
+			c.add(value[i]);
+		}
+		
+		for(int i=0; i<value.length; i++){
+			mtf[i]=new JTextField(10);
+			mtf[i].setSize(50, 20);
+			mtf[i].setLocation(100, 70+i*30);
+			c.add(mtf[i]);
+		}
+		change.setText("나머지는 0원입니다.");
+		change.setSize(150,20);
+		change.setLocation(30, 170);
+		c.add(change);
+	}
+	public static void main(String[] args){
+		new Prob11_3();
+	}
+}

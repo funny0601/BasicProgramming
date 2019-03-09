@@ -1,0 +1,50 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Prob12_1c extends JFrame{
+	static final int MARGIN=50;
+	MyPanel p=new MyPanel();
+	public Prob12_1c() {
+		super("ImageDrawingEx");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setContentPane(p);
+		setSize(300,300);
+		setVisible(true);
+	}
+	
+	class MyPanel extends JPanel {
+		private ImageIcon icon = new ImageIcon("images/back.jpg");
+		private Image img = icon.getImage();
+		private JButton button = new JButton("Hide/Show");
+		private boolean showFlag = true;
+		
+		public MyPanel() {
+			setLayout(new FlowLayout());
+			add(button);
+			
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showFlag = !showFlag; 
+					p.repaint(); 					
+				}				
+			});
+		}
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			if(showFlag) 
+				g.drawImage(img, MARGIN, MARGIN, getWidth()-MARGIN*2, getHeight()-MARGIN*2, this);			
+		}
+	}
+	
+	static public void main(String[] args) {
+		new Prob12_1c();
+	}
+}
+
+
+

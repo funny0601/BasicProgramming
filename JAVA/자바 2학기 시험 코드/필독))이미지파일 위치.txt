@@ -1,0 +1,2 @@
+프로젝트 안에 src / bin/ 파일이랑 나란하게 image파일 넣고
+refresh

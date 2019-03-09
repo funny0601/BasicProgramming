@@ -1,0 +1,91 @@
+package csy;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+class RandomThread extends Thread{
+	final int MARGIN =30;
+	Container c;
+	private boolean flag=true;
+	boolean exit=false;
+	public RandomThread(Container c) {
+		this.c=c;
+	}
+	public void finish() {
+		flag=!flag;
+	}
+	
+	@Override
+	public void run() {
+		while(true) {
+			if(flag==true) {
+				int x = (int) (Math.random()*(c.getWidth()));
+				int y= (int)(Math.random()*(c.getHeight()));
+				JLabel la=new JLabel("Java");
+				
+				try {
+					la.setFont(new Font("Consolas",Font.BOLD,28));
+					la.setOpaque(true);
+					//la.setBackground(Color.lightGray);
+					la.setSize(70, 30);
+					la.setLocation((x-2*MARGIN)+MARGIN, (y-2*MARGIN)+MARGIN);
+					c.add(la);
+					c.repaint();
+					Thread.sleep(1000);
+				}catch(InterruptedException e) {
+					c.removeAll();
+					la.setText("FINISHED");
+					la.setSize(80, 30);
+					la.setLocation(x, y);
+					la.setForeground(Color.red);
+					//la.setBackground(Color.black);
+					c.add(la);
+					c.repaint();
+					return;
+				}
+			}else {
+				try {
+					Thread.sleep(300);}
+				catch(InterruptedException e) {
+					return;}
+				
+			}
+		}
+	}
+}
+
+public class ex13_6 extends JFrame{
+	public ex13_6() {
+		setTitle("Thread Interrupted Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c=getContentPane();
+		c.setLayout(null);
+		//c.setBackground(Color.pink);
+		RandomThread rt=new RandomThread(c);
+		c.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				//rt.interrupt();
+				rt.finish();
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount()==2) {
+					rt.interrupt();
+				}
+				//rt.interrupt();
+				//rt.finish();
+			}
+		});	
+		
+		setSize(400,300);
+		setVisible(true);
+		rt.start();
+	}
+	
+	public static void main(String[] args) {
+		new ex13_6();
+	}
+
+}

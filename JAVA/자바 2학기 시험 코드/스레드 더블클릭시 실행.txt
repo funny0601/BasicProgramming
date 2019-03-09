@@ -1,0 +1,56 @@
+package csy;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class problem13_2 extends JFrame {
+	public problem13_2() {
+		super("ThreadEx");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MyPanel p = new MyPanel();
+		p.addMouseListener(new MouseAdapter() {
+			Thread th = null;
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (th == null) {
+					th = new Thread(p);
+					th.start();
+				}
+			}
+		});
+		setContentPane(p);
+		setSize(300, 200);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		new problem13_2();
+	}
+}
+
+class MyPanel extends JPanel implements Runnable {
+	int x = (int) (Math.random() * this.getWidth());
+	int y = (int) (Math.random() * this.getHeight());
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.MAGENTA);
+		g.drawOval(x, y, 50, 50);
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				return;
+			}
+			x = (int) (Math.random() * this.getWidth());
+			y = (int) (Math.random() * this.getHeight());
+			repaint(); // °è¼Ó Âï±â
+		}
+	}
+}

@@ -1,0 +1,46 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Prob9_2 extends JFrame{
+	private Color [] color={Color.red, Color.yellow, Color.green, Color.blue, Color.orange};
+	private String [] pos={"North","West", "Center", "East", "South"};
+	
+	public Prob9_2(){
+		
+		
+		JButton [] b=new JButton[5];
+		setTitle("GridLayout Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		Container c= getContentPane();
+		
+		c.setLayout(new BorderLayout(5,7));
+		for(int i=0; i<pos.length; i++){
+			b[i]=new JButton(pos[i]);
+			b[i].addMouseListener(new MyML());
+			c.add(b[i], pos[i]);
+		}
+		
+		setSize(400,300);
+		setVisible(true);
+	}
+	
+	class MyML extends MouseAdapter{
+		public void mouseEntered(MouseEvent e){
+			JButton b=(JButton)e.getSource();
+			for(int i=0; i<pos.length; i++){
+				if(b.getText().equals(pos[i])){
+					b.setBackground(color[i]);
+				}
+			}
+		}
+		public void mouseExited(MouseEvent e){
+			JButton b=(JButton)e.getSource();
+			b.setBackground(Color.white);
+		}
+	}
+	
+	public static void main(String[] args){
+		new Prob9_2();
+	}
+}

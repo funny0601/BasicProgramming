@@ -1,0 +1,40 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+/* Labels with even numbers on the LHS and Labels with odd numbers on the RHS(Right Hand-Side) */ 
+public class Prob9_6 extends JFrame{
+	static final int WIDTH=300, HEIGHT=300, MARGIN=50;
+	
+	public Prob9_6(){
+		setTitle("Random Labels Ex");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c=getContentPane();
+		c.setLayout(null);
+		JLabel l;
+		int x, y, d=2*MARGIN;
+		for (int i=0; i<20; i++){
+			if (i%2==0) {
+				x=(int)(Math.random()*((WIDTH-d)/2))+MARGIN;
+				y=(int)(Math.random()*(HEIGHT-d))+MARGIN;
+			}
+			else{
+				x=(int)(Math.random()*((WIDTH-d)/2))+d+MARGIN;
+				y=(int)(Math.random()*(HEIGHT-d))+MARGIN;
+			}
+			l = new JLabel(Integer.toString(i),SwingConstants.CENTER);
+			l.setLocation(x,y);
+			l.setOpaque(true);
+			l.setSize(20,10);
+			l.setBackground(Color.yellow);
+			c.add(l);
+		}
+		
+		setSize(WIDTH,HEIGHT+20);
+		setVisible(true);
+	}
+	
+	public static void main(String[] args){
+		new Prob9_6();
+	}
+}
