@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class PhoneWriterEx {
+
+	public static void main(String[] args) {
+		FileWriter fw = null;
+		File f = new File("c:\\Temp\\phone.txt");
+		try {
+			fw = new FileWriter(f);
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("전화번호 입력 프로그램입니다.");
+			while (true) {
+				System.out.print("이름 전화번호 >> ");
+				String line = scanner.nextLine(); // 한줄을 읽는다.
+				if (line.equals("exit"))
+					break; // 입력 종료
+
+				fw.write(line, 0, line.length());
+				fw.write("\r\n", 0, 2);
+			}
+			System.out.println("저장하였습니다.");
+
+			scanner.close();
+			fw.close();
+		} catch (IOException e) { // 파일을 저장할 수 없는 경우 예외
+			e.printStackTrace();
+		}
+
+		// 소문자를 대문자로 바꾸기
+		try {
+			FileReader fin = new FileReader(f);
+			int c;
+			while ((c = fin.read()) != -1) {
+				char a = (char) c;
+				if (Character.isLowerCase(a))
+					a = Character.toUpperCase(a);
+				System.out.print((char) a);
+			}
+			fin.close();
+		} catch (IOException e) {
+			System.out.println("File IO Error!");
+		}
+	}
+}
