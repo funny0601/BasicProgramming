@@ -4,7 +4,6 @@ class Rectangle{
 	String name;
 	int x, y, width, height;
 	
-	//- void compare(Rectangle r)¸¦ ÀÛ¼ºÇÏ¿© ³ĞÀÌ¸¦ ºñ±³ÇÏ°í ´ÙÀ½ °á°ú¿Í °°ÀÌ ÇÁ¸°Æ®ÇÏ¶ó.
 	public Rectangle(String name, int x, int y, int width, int height) {
 		this.name = name;
 		this.x = x;
@@ -25,7 +24,7 @@ class Rectangle{
 		return width*height;
 	}
 	void show() {
-		System.out.println("("+this.x+","+y+")¿¡¼­ Å©±â°¡ "+width+"x"+height+"ÀÎ »ç°¢Çü");
+		System.out.println("("+this.x+","+y+")ì—ì„œ í¬ê¸°ê°€ "+width+"x"+height+"ì¸ ì‚¬ê°í˜•");
 	}
 	boolean contains(Rectangle r) {
 		
@@ -48,9 +47,9 @@ public class Prob2_1 {
 		Rectangle u = new Rectangle("U", 5, 8);
 		
 		r.show();
-		System.out.println("sÀÇ ¸éÀûÀº "+s.square());
-		if(t.contains(r)) System.out.println("t´Â rÀ» Æ÷ÇÔÇÕ´Ï´Ù.");
-		if(t.contains(s)) System.out.println("t´Â s¸¦ Æ÷ÇÔÇÕ´Ï´Ù.");
+		System.out.println("sì˜ ë©´ì ì€ "+s.square());
+		if(t.contains(r)) System.out.println("tëŠ” rì„ í¬í•¨í•©ë‹ˆë‹¤.");
+		if(t.contains(s)) System.out.println("tëŠ” së¥¼ í¬í•¨í•©ë‹ˆë‹¤.");
 		u.compare(r);
 		u.compare(s);
 
