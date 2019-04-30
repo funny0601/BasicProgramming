@@ -29,12 +29,18 @@ class IntStack implements Stack {
 
 	@Override
 	public int pop() {
-		return array[i - 1];
+		if(i==0) {
+			System.out.println("이미 비어있는 스택입니다.");
+		}
+		int return_value = array[i-1];
+		i --; // 스택에서 pop했으니 전체 수도 줄여줘야함
+		return return_value;
 	}
 
 	@Override
 	public boolean push(int val) {
 		if (i >= array.length) {
+			System.out.println("더 이상 push 불가");
 			return false;
 		} else {
 			array[i] = val;
@@ -53,17 +59,17 @@ public class Prob2_4 {
 
 		IntStack stack = new IntStack(size);
 
-		int number = (int) (Math.random() * size) + 1;
-		System.out.println("Random number is " + number);
+		//int number = (int) (Math.random() * size) + 1;
+		//System.out.println("Random number is " + number);
 
 		System.out.print("Integer stored in the stack : ");
-		for (int i = number; i >= 0; i--) {
+		for (int i = 30; i >= 0; i--) {
 			stack.push(i);
-			System.out.print(stack.pop() + " ");
+			//System.out.print(stack.pop() + " ");
 		}
 
-		// System.out.println("저장된 스택 길이: "+ stack.length());
-		// System.out.println("사용 가능 스택 길이: "+stack.capacity());
+		System.out.println("저장된 스택 길이: "+ stack.length());
+		System.out.println("사용 가능 스택 길이: "+stack.capacity());
 	}
 
 }
