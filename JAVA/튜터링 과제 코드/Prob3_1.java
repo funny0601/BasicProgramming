@@ -2,16 +2,6 @@ package tutoring;
 
 import java.util.Scanner;
 
-/*
- * 
- * 
- * - ¿ø 2°³¸¦ ÀÔ·Â¹Ş¾Æ¼­ Á¤ÀÇÇÑ´Ù.
-
-- equals()¸Ş¼Òµå´Â ¹İÁö¸§ÀÌ °°À¸¸é °°Àº °ÍÀ¸·Î ¼öÁ¤ÇÑ´Ù.
- * 
- * 
- */
-
 
 class Circle{
 	private int x;
@@ -33,7 +23,7 @@ class Circle{
 	}
 	
 	public String toString() {
-		return "Circle("+x+","+y+")¹İÁö¸§"+radius;
+		return "Circle("+x+","+y+")ë°˜ì§€ë¦„"+radius;
 	}
 }
 public class Prob3_1 {
@@ -44,8 +34,8 @@ public class Prob3_1 {
 		System.out.print("The second circle (x, y, radius)");
 		Circle b = new Circle(sc.nextInt(), sc.nextInt(), sc.nextInt());
 		
-		System.out.println("¿ø a : "+a);
-		System.out.println("¿ø b : "+b);
+		System.out.println("ì› a : "+a);
+		System.out.println("ì› b : "+b);
 		
 		a.equals(b);
 		
