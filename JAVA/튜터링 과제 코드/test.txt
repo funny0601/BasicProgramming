@@ -1,0 +1,5 @@
+Kim 90
+Lee 50
+Yoo 88
+Kim 60
+Yoo 15
